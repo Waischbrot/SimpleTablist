@@ -1,7 +1,12 @@
 name: SimpleTablist
-version: '${project.version}'
+version: COMMISSION
 main: de.waischbrot.simpletablist.Main
 api-version: 1.17
 authors: [ Waischbrot ]
 description: Simple Tablist Plugin for handling hex color codes & Luckperms prefixes
 website: https://waischbrot.de
+softdepend:
+  - PlaceholderAPI
+commands:
+  tablist:
+    description: "settings for the tab list"
