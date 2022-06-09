@@ -51,23 +51,25 @@ public class ConfigManager {
             try {
                 configFile.createNewFile();
                 new FileOutputStream(configFile).write(
-                        ("##################################\n" +
-                                "#           TabListPlugin        #\n" +
-                                "##################################\n" +
-                                "#\n" +
-                                "#by ff__\n" +
-                                "updatePrefix: 3000\n" +
-                                "updateHeader: 5000\n" +
-                                "header:\n" +
-                                "  - '&7---------------&6header1&7---------------'\n" +
-                                "  - 'ezerhze'\n" +
-                                "  - '#123456header2'\n" +
-                                "  - '#ade405ethh'\n" +
-                                "footer:\n" +
-                                "  - ''\n" +
-                                "  - 'sometext'\n" +
-                                "  - '&adiscord.gg/rubymc'\n" +
-                                "  - '&7---------------&6footer4&7--------------'\n").getBytes()
+                        ("""
+                                ##################################
+                                #           TabListPlugin        #
+                                ##################################
+                                #
+                                #by ff__
+                                updatePrefix: 3000
+                                updateHeader: 5000
+                                header:
+                                  - '&7---------------&6header1&7---------------'
+                                  - 'ezerhze'
+                                  - '#123456header2'
+                                  - '#ade405ethh'
+                                footer:
+                                  - ''
+                                  - 'sometext'
+                                  - '&adiscord.gg/rubymc'
+                                  - '&7---------------&6footer4&7--------------'
+                                """).getBytes()
                 );
             } catch (IOException e) {
                 e.printStackTrace();
