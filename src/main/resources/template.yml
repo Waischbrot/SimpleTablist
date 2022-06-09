@@ -1,0 +1,16 @@
+##################################
+#           TabListPlugin        #
+##################################
+#
+updatePrefix: 3000
+updateHeader: 5000
+header:
+  - '&7---------------&6header1&7---------------'
+  - 'ezerhze'
+  - '#123456header2'
+  - '#ade405ethh'
+footer:
+  - ''
+  - 'sometext'
+  - '&aWaischbrot is kuhl'
+  - '&7---------------&6footer4&7--------------'
