@@ -10,9 +10,8 @@ import static de.waischbrot.simpletablist.utils.Utils.stringListOf;
 
 public class TablistAutoCompleter implements TabCompleter {
 
-
     @Override
-    public List<String> onTabComplete(CommandSender commandSender,Command command,String string,String[] args) {
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String string, String[] args) {
         if (args.length == 1) {
             return stringListOf("disable", "enable", "visibility");
         }
