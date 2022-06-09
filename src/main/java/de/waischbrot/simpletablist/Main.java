@@ -12,7 +12,6 @@ public final class Main extends JavaPlugin {
 
     public String pluginName = "plugins/TabList";
     public boolean running = false;
-    private ConfigManager configManager;
     private TablistManager tabListManager;
 
     public int waitHeader;
@@ -30,7 +29,7 @@ public final class Main extends JavaPlugin {
         else throw new IllegalStateException("LuckPerms not found");
 
         running = true;
-        configManager = new ConfigManager(this,"config.yml");
+        ConfigManager configManager = new ConfigManager(this, "config.yml");
         initCommands();
 
         getServer().getPluginManager().registerEvents(new MainListener(this), this);
@@ -38,13 +37,13 @@ public final class Main extends JavaPlugin {
         //load config
         var text = configManager.loadConfig();
 
-        var header = StringUtil.format(String.join("\n", text.first()));
-        var footer = StringUtil.format(String.join("\n", text.second()));
+        var header = StringUtil.format(String.join("\n", text.v1()));
+        var footer = StringUtil.format(String.join("\n", text.v2()));
         tabListManager = new TablistManager(this, header, footer);
 
         var rates = configManager.getUpdateRates();
-        waitHeader = rates.second();
-        waitRank = rates.first();
+        waitHeader = rates.v2();
+        waitRank = rates.v1();
 
         tabListManager.startSorter();
         tabListManager.sendTab(Bukkit.getOnlinePlayers());
@@ -58,10 +57,6 @@ public final class Main extends JavaPlugin {
 
     public TablistManager getTabListManager() {
         return tabListManager;
-    }
-
-    public ConfigManager getConfigManager() {
-        return configManager;
     }
 
     private void initCommands() {
