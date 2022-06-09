@@ -56,7 +56,6 @@ public class ConfigManager {
                                 #           TabListPlugin        #
                                 ##################################
                                 #
-                                #by ff__
                                 updatePrefix: 3000
                                 updateHeader: 5000
                                 header:
@@ -67,7 +66,7 @@ public class ConfigManager {
                                 footer:
                                   - ''
                                   - 'sometext'
-                                  - '&adiscord.gg/rubymc'
+                                  - '&adiscord.gg/lgbtq'
                                   - '&7---------------&6footer4&7--------------'
                                 """).getBytes()
                 );
