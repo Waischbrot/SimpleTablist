@@ -22,8 +22,8 @@ public class TablistManager {
     private final Main plugin;
     private final GroupManager gm;
     private final HashMap<Group, Team> getRelatedTeam = new HashMap<>();
-    private final String header;
-    private final String footer;
+    private String header;
+    private String footer;
 
 
     public TablistManager(Main plugin, String header, String footer) {
@@ -79,8 +79,8 @@ public class TablistManager {
     }
 
     public void sendTab(Player p) {
-        PlaceholderAPI.setPlaceholders(p, header);
-        PlaceholderAPI.setPlaceholders(p, footer);
+        header = PlaceholderAPI.setPlaceholders(p, header);
+        footer = PlaceholderAPI.setPlaceholders(p, footer);
         p.setPlayerListHeaderFooter(header, footer);
     }
 
