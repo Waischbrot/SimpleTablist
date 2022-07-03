@@ -1,6 +1,14 @@
 package de.waischbrot.simpletablist.listeners;
 
 import de.waischbrot.simpletablist.Main;
+import de.waischbrot.simpletablist.utils.StringUtil;
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
 public class ChatListener implements Listener {
@@ -9,5 +17,17 @@ public class ChatListener implements Listener {
 
     public ChatListener(Main plugin) {
         this.plugin = plugin;
+    }
+
+    @EventHandler
+    public void onChat(AsyncChatEvent event) {
+
+        TextComponent message = Component.text("").append(event.originalMessage());
+        String plainMessage = message.content();
+        Player player = event.getPlayer();
+
+        StringUtil.getMessageColour(plainMessage);
+
+        event.message(Component.text(plainMessage));
     }
 }
