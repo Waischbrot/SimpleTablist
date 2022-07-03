@@ -1,28 +1,38 @@
+# Wie oft soll der Spielername aktualisiert werden
 updatePrefix: 600
 
+# Einstellungen der Tablist
 tablist:
+  # Wie oft soll die Tablist aktualisiert werden?
   updateTab: 60
 
+  # Was soll im Header stehen?
   header:
-    - ''
-    - ''
-    - ''
-    - ''
+    - 'tsrsef'
+    - 'efsfsef'
+    - 'sfsffs'
+    - 'sefsf'
 
+  # Was soll im Footer stehen?
   footer:
-    - ''
-    - ''
-    - ''
-    - ''
+    - 'sefsef'
+    - 'sefsef'
+    - 'sefsefdfgdhtrh'
+    - 'dthtfhddrgdesfs'
 
+# Einstellungen für das Scoreboard
 scoreboard:
+  # Wie oft soll das Scoreboard aktualisiert werden?
   update: 20
+  # Aussehen des Scoreboards
   lines:
-    - ''
-    - ''
-    - ''
-    - ''
-    - ''
+    - 'sgsegsegsg'
+    - 'segsegsegseg'
+    - 'sgseghzrafe'
+    - 'gzktfgafawf'
+    - 'adaegw'
 
+# Einstellungen für den Chat
 chat:
+  # Chatformat
   format: '%prefix% %player%&8: &7%message%'

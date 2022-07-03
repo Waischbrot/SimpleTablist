@@ -50,6 +50,12 @@ public class ScoreboardManager {
 
     }
 
+    public boolean checkPlayer(Player player) {
+
+        return boards.containsKey(player.getUniqueId());
+
+    }
+
     private void updateBoard(FastBoard board) {
 
         List<String> newLines = lines;

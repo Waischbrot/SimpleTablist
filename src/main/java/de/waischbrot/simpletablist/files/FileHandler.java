@@ -23,8 +23,8 @@ public class FileHandler {
 
         config = new Yaml("config", plugin.getDataFolder().getPath());
 
-        if (config.singleLayerKeySet().size() == 0) {
-            copy(plugin.getResource("config,yml"), config.getFile());
+        if (!config.contains("updatePrefix")) {
+            copy(plugin.getResource("config.yml"), config.getFile());
         }
     }
 
@@ -37,8 +37,8 @@ public class FileHandler {
                     output.write(buf, 0, bytesRead);
                 }
             }
-        } catch (Exception exception) {
-            exception.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
