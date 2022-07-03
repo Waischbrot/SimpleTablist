@@ -1,6 +1,7 @@
 package de.waischbrot.simpletablist.manager;
 
 import de.waischbrot.simpletablist.Main;
+import org.bukkit.entity.Player;
 
 import java.text.DecimalFormat;
 
@@ -25,7 +26,7 @@ public class StringFormatter {
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
         if(text != null){
-            if(SimpleTabList.getPlugin().config.getBoolean("Chat.Colors")){
+            if(Main.getPlugin().config.getBoolean("Chat.Colors")){
                 return text
                         .replace("%", "")
                         .replace("&", "§")

@@ -7,6 +7,9 @@ description: Simple Tablist Plugin for handling hex color codes & Luckperms pref
 website: https://waischbrot.de
 softdepend:
   - PlaceholderAPI
+depend:
+  - LuckPerms
 commands:
-  tablist:
-    description: "settings for the tab list"
+  stl:
+    usage: /stl <reload>
+    description: Get plugin help or reload the config.
