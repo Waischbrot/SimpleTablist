@@ -13,27 +13,30 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 
 public class DisplayNameProvider {
 
+    private LuckPerms api;
+
     public DisplayNameProvider(Main plugin) {
+
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider == null) {
+            Bukkit.getPluginManager().disablePlugin(plugin);
+            return;
+        }
+        api = provider.getProvider();
 
         Yaml config = plugin.getFileHandler().getConfig();
         int runningDelay = config.getOrSetDefault("updatePrefix", 600);
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
 
             for (Player player : Bukkit.getOnlinePlayers()) {
-                sendTag(player);
+                updateName(player);
             }
 
         }, 0, runningDelay);
     }
 
-    private void sendTag(Player player) {
+    private void updateName(Player player) {
 
-        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
-        if (provider == null) {
-            return;
-        }
-
-        LuckPerms api = provider.getProvider();
         CachedMetaData metaData = api.getPlayerAdapter(Player.class).getMetaData(player);
 
         String prefix = metaData.getPrefix();
@@ -45,6 +48,7 @@ public class DisplayNameProvider {
         TextComponent result = Component.text(StringUtil.getMessageColour(prefix + player.getName() + suffix));
 
         player.displayName(result);
+        player.playerListName(result);
         player.customName(result);
         player.setCustomNameVisible(true);
 
