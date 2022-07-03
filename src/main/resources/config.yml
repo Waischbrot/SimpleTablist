@@ -1,6 +1,7 @@
+updatePrefix: 600
+
 tablist:
   updateTab: 60
-  updatePrefix: 600
 
   header:
     - ''
