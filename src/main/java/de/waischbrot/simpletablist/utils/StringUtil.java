@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 public final class StringUtil {
 
     public static String getMessageColour(String text) {
-
         Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
         Matcher match = pattern.matcher(text);
 

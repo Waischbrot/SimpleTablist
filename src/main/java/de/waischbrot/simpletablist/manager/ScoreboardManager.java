@@ -8,10 +8,7 @@ import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class ScoreboardManager {
 
@@ -58,13 +55,12 @@ public class ScoreboardManager {
 
     private void updateBoard(FastBoard board) {
 
-        List<String> newLines = lines;
+        List<String> newLines = new ArrayList<>();
 
-        for (String text : newLines) {
+        for (String text : lines) {
 
             text = PlaceholderAPI.setPlaceholders(board.getPlayer(), text);
-            StringUtil.getMessageColour(text);
-
+            newLines.add(StringUtil.getMessageColour(text));
         }
 
         board.updateLines(newLines);

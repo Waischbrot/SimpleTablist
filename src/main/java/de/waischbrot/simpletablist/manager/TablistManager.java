@@ -34,10 +34,16 @@ public class TablistManager {
     private void sendHeader(Player player, List<String> content) {
 
         Component header = Component.text("");
+        boolean first = true;
         for (String text : content) {
-            text = PlaceholderAPI.setPlaceholders(player, text);
-            StringUtil.getMessageColour(text);
-            header = header.append(Component.text(text)).append(Component.newline());
+            if (first) {
+                first = false;
+            } else {
+                header = header.append(Component.newline());
+            }
+
+            text = PlaceholderAPI.setPlaceholders(player, StringUtil.getMessageColour(text));
+            header = header.append(Component.text(text));
         }
         player.sendPlayerListHeader(header);
 
@@ -46,10 +52,16 @@ public class TablistManager {
     private void sendFooter(Player player, List<String> content) {
 
         Component footer = Component.text("");
+        boolean first = true;
         for (String text : content) {
-            text = PlaceholderAPI.setPlaceholders(player, text);
-            StringUtil.getMessageColour(text);
-            footer = footer.append(Component.text(text)).append(Component.newline());
+            if (first) {
+                first = false;
+            } else {
+                footer = footer.append(Component.newline());
+            }
+
+            text = PlaceholderAPI.setPlaceholders(player, StringUtil.getMessageColour(text));
+            footer = footer.append(Component.text(text));
         }
         player.sendPlayerListFooter(footer);
 
