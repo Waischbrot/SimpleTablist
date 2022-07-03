@@ -1,9 +1,7 @@
 package de.waischbrot.simpletablist.commands;
 
 import de.waischbrot.simpletablist.Main;
-import de.waischbrot.simpletablist.manager.NameProvider;
 import de.waischbrot.simpletablist.manager.PrefixUpdater;
-import de.waischbrot.simpletablist.manager.TabManager;
 import de.waischbrot.simpletablist.messages.MessageHandler;
 import de.waischbrot.simpletablist.permissions.Permissions;
 import org.bukkit.ChatColor;
