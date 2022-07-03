@@ -60,7 +60,8 @@ public class ScoreboardManager {
         for (String text : lines) {
 
             text = PlaceholderAPI.setPlaceholders(board.getPlayer(), text);
-            newLines.add(StringUtil.getMessageColour(text));
+            newLines.add(StringUtil.getLegacyColour(text));
+
         }
 
         board.updateLines(newLines);

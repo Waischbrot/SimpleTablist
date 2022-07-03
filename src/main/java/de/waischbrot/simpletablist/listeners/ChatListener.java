@@ -25,6 +25,6 @@ public class ChatListener implements Listener {
         String plainMessage = LegacyComponentSerializer.legacyAmpersand().serialize(message);
         Player player = event.getPlayer();
 
-        event.message(Component.text(StringUtil.getMessageColour(plainMessage)));
+        event.message(StringUtil.getAdventureColour(plainMessage));
     }
 }

@@ -1,5 +1,8 @@
 package de.waischbrot.simpletablist.utils;
 
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 
 import java.util.regex.Matcher;
@@ -7,19 +10,37 @@ import java.util.regex.Pattern;
 
 public final class StringUtil {
 
-    public static String getMessageColour(String text) {
-        Pattern pattern = Pattern.compile("#[a-fA-F0-9]{6}");
-        Matcher match = pattern.matcher(text);
+    public static String getLegacyColour(String text) {
 
-        while (match.find()) {
-            String color = text.substring(match.start(), match.end());
-            text = text.replace(color, ChatColor.of(color) + "");
+        if (text.contains("#")) {
+            Pattern pattern = Pattern.compile("#[a-fA-F\\d]{6}");
+            Matcher match = pattern.matcher(text);
 
-            match = pattern.matcher(text);
+            while (match.find()) {
+                String color = text.substring(match.start(), match.end());
+                text = text.replace(color, ChatColor.of(color) + "");
+
+                match = pattern.matcher(text);
+            }
         }
 
-        text = ChatColor.translateAlternateColorCodes('&', text);
+        return ChatColor.translateAlternateColorCodes('&', text);
+    }
 
-        return text;
+    public static TextComponent getAdventureColour(String text) {
+
+        if (text.contains("#")) {
+            Pattern pattern = Pattern.compile("#[a-fA-F\\d]{6}");
+            Matcher match = pattern.matcher(text);
+
+            while (match.find()) {
+                String color = text.substring(match.start(), match.end());
+                text = text.replace(color, TextColor.fromHexString(color) + "");
+
+                match = pattern.matcher(text);
+            }
+        }
+
+        return LegacyComponentSerializer.legacy('&').deserialize(text);
     }
 }

@@ -5,6 +5,7 @@ import de.waischbrot.simpletablist.Main;
 import de.waischbrot.simpletablist.utils.StringUtil;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.Bukkit;
@@ -45,7 +46,7 @@ public class DisplayNameProvider {
         if (prefix == null) prefix = "";
         if (suffix == null) suffix = "";
 
-        TextComponent result = Component.text(StringUtil.getMessageColour(prefix + player.getName() + suffix));
+        TextComponent result = StringUtil.getAdventureColour(prefix + player.getName() + suffix);
 
         player.displayName(result);
         player.playerListName(result);

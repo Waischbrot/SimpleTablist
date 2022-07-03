@@ -5,6 +5,7 @@ import de.waischbrot.simpletablist.Main;
 import de.waischbrot.simpletablist.utils.StringUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -42,8 +43,9 @@ public class TablistManager {
                 header = header.append(Component.newline());
             }
 
-            text = PlaceholderAPI.setPlaceholders(player, StringUtil.getMessageColour(text));
-            header = header.append(Component.text(text));
+            text = PlaceholderAPI.setPlaceholders(player, text);
+            header = header.append(StringUtil.getAdventureColour(text));
+
         }
         player.sendPlayerListHeader(header);
 
@@ -60,8 +62,8 @@ public class TablistManager {
                 footer = footer.append(Component.newline());
             }
 
-            text = PlaceholderAPI.setPlaceholders(player, StringUtil.getMessageColour(text));
-            footer = footer.append(Component.text(text));
+            text = PlaceholderAPI.setPlaceholders(player, text);
+            footer = footer.append(StringUtil.getAdventureColour(text));
         }
         player.sendPlayerListFooter(footer);
 
