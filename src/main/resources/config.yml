@@ -15,6 +15,7 @@ tablist:
     - ''
 
 scoreboard:
+  update: 20
   lines:
     - ''
     - ''
