@@ -1,0 +1,26 @@
+tablist:
+  updateTab: 60
+  updatePrefix: 600
+
+  header:
+    - ''
+    - ''
+    - ''
+    - ''
+
+  footer:
+    - ''
+    - ''
+    - ''
+    - ''
+
+scoreboard:
+  lines:
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+
+chat:
+  format: '%prefix% %player%&8: &7%message%'

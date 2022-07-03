@@ -9,7 +9,3 @@ softdepend:
   - PlaceholderAPI
 depend:
   - LuckPerms
-commands:
-  stl:
-    usage: /stl <reload>
-    description: Get plugin help or reload the config.
