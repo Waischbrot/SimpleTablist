@@ -7,6 +7,7 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.Bukkit;
@@ -36,9 +37,8 @@ public class ChatListener implements Listener {
     public void onChat(AsyncChatEvent event) {
 
         Player player = event.getPlayer();
-        TextComponent content = Component.text("").append(event.originalMessage());
 
-        String legacyMessage = content.content();
+        String legacyMessage = PlainTextComponentSerializer.plainText().serialize(event.message());
         System.out.println(legacyMessage);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
