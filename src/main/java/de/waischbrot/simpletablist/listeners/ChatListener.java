@@ -7,7 +7,6 @@ import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
 import org.bukkit.Bukkit;
@@ -37,9 +36,10 @@ public class ChatListener implements Listener {
     public void onChat(AsyncChatEvent event) {
 
         Player player = event.getPlayer();
-        TextComponent content = Component.text("").append(event.message());
+        TextComponent content = Component.text("").append(event.originalMessage());
 
         String legacyMessage = content.content();
+        System.out.println(legacyMessage);
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (legacyMessage.contains("@" + p.getName())) {
@@ -56,11 +56,13 @@ public class ChatListener implements Listener {
         if (suffix == null) suffix = "";
 
         String mF = format;
+        System.out.println(mF);
 
         mF = mF.replace("%player%", player.getName());
         mF = mF.replace("%prefix%", prefix);
         mF = mF.replace("%suffix%", suffix);
         mF = mF.replace("%message%", legacyMessage);
+        System.out.println(mF);
 
         TextComponent message = StringUtil.getAdventureColour(mF);
         event.message(message);
