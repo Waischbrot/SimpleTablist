@@ -21,10 +21,5 @@ public class ChatListener implements Listener {
     @EventHandler
     public void onChat(AsyncChatEvent event) {
 
-        TextComponent message = Component.text("").append(event.message());
-        String plainMessage = LegacyComponentSerializer.legacyAmpersand().serialize(message);
-        Player player = event.getPlayer();
-
-        event.message(StringUtil.getAdventureColour(plainMessage));
     }
 }
