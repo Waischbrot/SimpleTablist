@@ -3,38 +3,46 @@ package de.waischbrot.simpletablist;
 import de.waischbrot.simpletablist.files.FileHandler;
 import de.waischbrot.simpletablist.listeners.ChatListener;
 import de.waischbrot.simpletablist.listeners.JoinQuitListener;
-import de.waischbrot.simpletablist.manager.PrefixUpdater;
-import de.waischbrot.simpletablist.manager.TabManager;
+import de.waischbrot.simpletablist.manager.DisplayNameProvider;
+import de.waischbrot.simpletablist.manager.ScoreboardManager;
+import de.waischbrot.simpletablist.manager.TablistManager;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-import org.checkerframework.checker.units.qual.C;
 
 public final class Main extends JavaPlugin {
 
     private FileHandler fileHandler;
+    private ScoreboardManager scoreboardManager;
+    private TablistManager tablistManager;
+    private DisplayNameProvider displayNameProvider;
 
     @Override
     public void onEnable() {
 
         fileHandler = new FileHandler(this);
+        scoreboardManager = new ScoreboardManager(this);
+        tablistManager = new TablistManager(this);
+        displayNameProvider = new DisplayNameProvider(this);
 
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                TabManager.Update();
-                PrefixUpdater.Update();
-            }
-        }.runTaskTimer(this, 0, 20L);
-
-        PluginManager pm = getServer().getPluginManager();
-        pm.registerEvents(new JoinQuitListener(), this);
-        pm.registerEvents(new ChatListener(), this);
-
+        PluginManager pm = Bukkit.getPluginManager();
+        pm.registerEvents(new ChatListener(this), this);
+        pm.registerEvents(new JoinQuitListener(this), this);
     }
 
     public FileHandler getFileHandler() {
         return fileHandler;
+    }
+
+    public ScoreboardManager getScoreboardManager() {
+        return scoreboardManager;
+    }
+
+    public TablistManager getTablistManager() {
+        return tablistManager;
+    }
+
+    public DisplayNameProvider getDisplayNameProvider() {
+        return displayNameProvider;
     }
 }

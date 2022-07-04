@@ -10,8 +10,8 @@ import java.nio.file.Files;
 
 public class FileHandler {
 
-    private Main plugin;
     private Yaml config;
+    private final Main plugin;
 
     public FileHandler(Main plugin) {
         this.plugin = plugin;
@@ -23,8 +23,9 @@ public class FileHandler {
 
         config = new Yaml("config", plugin.getDataFolder().getPath());
 
-        copy(plugin.getResource("config.yml"), config.getFile());
-
+        if (!config.contains("updatePrefix")) {
+            copy(plugin.getResource("config.yml"), config.getFile());
+        }
     }
 
     private void copy(InputStream source, File dest) {
