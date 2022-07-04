@@ -1,16 +1,18 @@
 package de.waischbrot.simpletablist.manager;
 
-import de.leonhard.storage.Yaml;
 import de.waischbrot.simpletablist.Main;
 import de.waischbrot.simpletablist.utils.StringUtil;
-import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.cacheddata.CachedMetaData;
+import net.luckperms.api.model.group.Group;
+import net.luckperms.api.model.user.User;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.bukkit.scoreboard.Team;
+
+import java.util.Objects;
 
 public class DisplayNameProvider {
 
@@ -25,18 +27,9 @@ public class DisplayNameProvider {
         }
         api = provider.getProvider();
 
-        Yaml config = plugin.getFileHandler().getConfig();
-        int runningDelay = config.getOrSetDefault("updatePrefix", 600);
-        Bukkit.getScheduler().runTaskTimer(plugin, () -> {
-
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                updateName(player);
-            }
-
-        }, 0, runningDelay);
     }
 
-    private void updateName(Player player) {
+    public void updateName(Player player) {
 
         CachedMetaData metaData = api.getPlayerAdapter(Player.class).getMetaData(player);
 
@@ -50,8 +43,12 @@ public class DisplayNameProvider {
 
         player.displayName(result);
         player.playerListName(result);
-        player.customName(result);
-        player.setCustomNameVisible(true);
+
+        User user = api.getUserManager().getUser(player.getUniqueId());
+        Group group = api.getGroupManager().getGroup(Objects.requireNonNull(user).getPrimaryGroup());
+        Team team = Bukkit.getScoreboardManager().getMainScoreboard().registerNewTeam(Objects.requireNonNull(group).getWeight() + group.getFriendlyName());
+        team.displayName(result);
+        team.addEntry(player.getName());
 
     }
 }

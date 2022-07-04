@@ -1,7 +1,6 @@
 package de.waischbrot.simpletablist.utils;
 
 import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.TextColor;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import net.md_5.bungee.api.ChatColor;
 
@@ -33,8 +32,9 @@ public final class StringUtil {
                 .character('&')
                 .hexCharacter('#')
                 .hexColors()
+                .useUnusualXRepeatedCharacterHexFormat()
                 .build();
 
-        return serializer.deserialize(text);
+        return serializer.deserialize(getLegacyColour(text));
     }
 }

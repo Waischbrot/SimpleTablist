@@ -21,6 +21,8 @@ public class JoinQuitListener implements Listener {
         Player player = event.getPlayer();
         plugin.getScoreboardManager().addPlayer(player);
 
+        plugin.getDisplayNameProvider().updateName(player);
+
     }
 
     @EventHandler
