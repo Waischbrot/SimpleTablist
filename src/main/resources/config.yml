@@ -25,6 +25,7 @@ scoreboard:
   # Wie oft soll das Scoreboard aktualisiert werden?
   update: 20
   # Aussehen des Scoreboards
+  title: 'LocusMC'
   lines:
     - 'sgsegsegsg'
     - 'segsegsegseg'

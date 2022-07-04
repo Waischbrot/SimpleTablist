@@ -5,7 +5,6 @@ import de.waischbrot.simpletablist.Main;
 import de.waischbrot.simpletablist.utils.StringUtil;
 import me.clip.placeholderapi.PlaceholderAPI;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

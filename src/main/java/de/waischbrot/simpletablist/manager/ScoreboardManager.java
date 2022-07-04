@@ -14,6 +14,7 @@ public class ScoreboardManager {
 
     private final Map<UUID, FastBoard> boards;
     private final List<String> lines;
+    private final String title;
 
     public ScoreboardManager(Main plugin) {
         boards = new HashMap<>();
@@ -21,6 +22,7 @@ public class ScoreboardManager {
         Yaml config = plugin.getFileHandler().getConfig();
 
         lines = config.getStringList("scoreboard.lines");
+        title = config.getString("scoreboard.title");
 
         int runningDelay = config.getOrSetDefault("scoreboard.update", 20);
         Bukkit.getScheduler().runTaskTimer(plugin, () -> {
@@ -33,7 +35,8 @@ public class ScoreboardManager {
     public void addPlayer(Player player) {
 
         FastBoard board = new FastBoard(player);
-        board.updateTitle("");
+        String bTitle = StringUtil.getLegacyColour(PlaceholderAPI.setPlaceholders(board.getPlayer(), title));
+        board.updateTitle(bTitle);
         boards.put(player.getUniqueId(), board);
 
     }
