@@ -29,18 +29,12 @@ public final class StringUtil {
 
     public static TextComponent getAdventureColour(String text) {
 
-        if (text.contains("#")) {
-            Pattern pattern = Pattern.compile("#[a-fA-F\\d]{6}");
-            Matcher match = pattern.matcher(text);
+        LegacyComponentSerializer serializer = LegacyComponentSerializer.builder()
+                .character('&')
+                .hexCharacter('#')
+                .hexColors()
+                .build();
 
-            while (match.find()) {
-                String color = text.substring(match.start(), match.end());
-                text = text.replace(color, TextColor.fromHexString(color) + "");
-
-                match = pattern.matcher(text);
-            }
-        }
-
-        return LegacyComponentSerializer.legacy('&').deserialize(text);
+        return serializer.deserialize(text);
     }
 }
