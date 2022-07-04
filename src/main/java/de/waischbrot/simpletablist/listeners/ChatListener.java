@@ -2,7 +2,9 @@ package de.waischbrot.simpletablist.listeners;
 
 import de.waischbrot.simpletablist.Main;
 import de.waischbrot.simpletablist.utils.StringUtil;
+import io.papermc.paper.chat.ChatRenderer;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.audience.Audience;
 import net.kyori.adventure.key.Key;
 import net.kyori.adventure.sound.Sound;
 import net.kyori.adventure.text.Component;
@@ -15,8 +17,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.RegisteredServiceProvider;
+import org.jetbrains.annotations.NotNull;
 
-public class ChatListener implements Listener {
+public class ChatListener implements Listener, ChatRenderer {
 
     private String format;
     private LuckPerms api;
@@ -66,5 +69,38 @@ public class ChatListener implements Listener {
 
         TextComponent message = StringUtil.getAdventureColour(mF);
         event.message(message);
+    }
+
+    @Override
+    public @NotNull Component render(@NotNull Player player, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
+
+        String legacyMessage = PlainTextComponentSerializer.plainText().serialize(message);
+        System.out.println(legacyMessage);
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (legacyMessage.contains("@" + p.getName())) {
+                legacyMessage = legacyMessage.replace('@' + p.getName(), "&b@" + p.getName());
+                p.playSound(Sound.sound(Key.key("block.note_block.chime"), Sound.Source.AMBIENT, 4f, 1f));
+            }
+        }
+
+        CachedMetaData metaData = api.getPlayerAdapter(Player.class).getMetaData(player);
+
+        String prefix = metaData.getPrefix();
+        String suffix = metaData.getSuffix();
+        if (prefix == null) prefix = "";
+        if (suffix == null) suffix = "";
+
+        String mF = format;
+        System.out.println(mF);
+
+        mF = mF.replace("%player%", player.getName());
+        mF = mF.replace("%prefix%", prefix);
+        mF = mF.replace("%suffix%", suffix);
+        mF = mF.replace("%message%", legacyMessage);
+        System.out.println(mF);
+
+        TextComponent msg = StringUtil.getAdventureColour(mF);
+        return msg;
     }
 }
