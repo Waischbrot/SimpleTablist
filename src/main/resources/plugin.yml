@@ -8,3 +8,11 @@ website: https://waischbrot.de
 depend:
   - LuckPerms
   - PlaceholderAPI
+
+commands:
+  scoreboard:
+    description: Toggle Scoreboard
+    usage: /scoreboard OR /scoreboard <Player>
+    tablist:
+      description: TabList settings
+      usage: /tablist reload
